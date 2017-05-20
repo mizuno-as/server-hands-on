@@ -118,7 +118,7 @@ server {
   gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
 
   add_header Strict-Transport-Security "max-age=31536000";
-  add_header Content-Security-Policy "style-src 'self' 'unsafe-inline'; script-src 'self'; object-src 'self'; img-src data: https:; media-src data: https:; connect-src 'self' wss://example.com; upgrade-insecure-requests";
+  add_header Content-Security-Policy "style-src 'self' 'unsafe-inline'; script-src 'self'; object-src 'self'; img-src data: https:; media-src data: https:; connect-src 'self' wss://${FQDN}; upgrade-insecure-requests";
 
   location / {
     try_files \$uri @proxy;
@@ -174,7 +174,7 @@ cat >/etc/cron.d/renew-ssl <<EOF
 EOF
 
 # 依存パッケージインストール
-apt install -y postgresql redis-server git ruby-dev ruby-build postgresql-server-dev-all npm
+apt install -y postgresql redis-server git ruby-dev ruby-build postgresql-server-dev-all npm imagemagick
 npm install -g yarn
 npm install -g n
 n latest
